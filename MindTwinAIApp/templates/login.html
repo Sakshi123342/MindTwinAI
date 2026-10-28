@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/auth.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="box">
+    <h2>Welcome Back!</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button type="submit">Login</button>
+    </form>
+    <p class="small-text">Don't have an account ? 
+        <a href="{% url 'signup' %}">Sign Up</a>
+    </p>
+</div>
+{% endblock %}

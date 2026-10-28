@@ -1,0 +1,52 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block title %}What-if Analysis | MindTwin AI{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/decision.css' %}">
+{% endblock %}
+
+{% block content %}
+<header class="page-header">
+    <h1>What-if Analysis</h1>
+    <p>See how your chance changes if you study more or less each day.</p>
+</header>
+
+
+{% if decisions %}
+<div class="details-card">
+    <form method="get" class="whatif-form">
+        <span>Choose a goal:</span>
+        <select name="decision">
+            {% for d in decisions %}
+            <option value="{{ d.pk }}" {% if selected and selected.pk == d.pk %}selected{% endif %}>{{ d.goal }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit" class="dc-btn">Compare</button>
+    </form>
+</div>
+{% if selected %}
+<div class="detail-card">
+    <h3>{{ selected.goal }}</h3>
+    <p class="muted">Your plan: {{ selected.daily_hours }} hours/day &bull; {{ selected.days_left }} days left</p>
+    <table class="whatif-table">
+        <tr><th>Hours per day</th><th>Chance of finishing</th></tr>
+        {% for s in scenarios %}
+        <tr>
+            <td>{{ s.hours }} hours{{ s.hours|pluralize }}</td>
+            <td><b>{{ s.chance }}%</b></td>
+        </tr>
+        {% endfor %}
+    </table>
+    <p class="muted">Minimum needed: {{ selected.required_daily_hours }} hours/day</p>
+</div>
+{% endif %}
+
+{% else %}
+<div class="detail-card">
+    <p class="muted">You have no goals in progress yet.</p>
+    <a href="{% url 'new_decision' %}" class="dc-btn">New Decision</a>
+</div>
+{% endif %}
+{% endblock %}

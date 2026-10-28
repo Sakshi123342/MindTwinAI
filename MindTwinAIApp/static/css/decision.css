@@ -1,0 +1,153 @@
+/* new decision form */
+.form-card,
+.detail-card{
+    background: #fff;
+    border-radius:12px;
+    padding: 28px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    max-width: 560px;
+    margin-bottom: 20px;
+}
+
+.form-card h2,
+.detail-card h2,
+.detail-card h3{
+    margin-top: 0;
+}
+
+.form-field{
+    margin-bottom: 16px;
+}
+
+.form-field label{
+    display:block;
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 6px;
+}
+
+.form-field input,
+.form-field select{
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #d4d4e8;
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+
+.form-field input:focus,
+.form-field select:focus{
+    outline: none;
+    border-color: #4f46e5;
+}
+
+.field-error{
+    color: #dc2626;
+    font-size: 13px;
+    margin-top: 4px;
+}
+
+.dc-btn{
+    display: inline-block;
+    padding: 11px 20px;
+    background: #4f46e5;
+    color: #fff;
+    border: 0;
+    border-radius: 8px;
+    font-size: 15px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.dc-btn:hover{
+    background: #4338ca;
+}
+
+/* decision detail */
+.chance-value{
+    font-size: 44px;
+    font-weight: 700;
+    color: #4f46e5;
+    line-height: 1.1;
+}
+
+.chance-low{color: #dc2626;}
+.chance-mid { color: #d97706; }
+.chance-high { color: #16a34a; }
+
+.muted{
+    color: #6b7280;
+    font-size: 14px;
+}
+
+.whatif-form{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+}
+
+.whatif-form input{
+    width: 90px;
+    padding: 10px;
+    border: 1px solid #d4d4e8;
+    border-radius: 8px;
+}
+
+.back-link{
+    color: #4f46e5;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.whatif-table{
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0;
+}
+
+.whatif-table th,
+.whatif-table td{
+    text-align: left;
+    padding: 10px 12px;
+    border-bottom: 1px solid #ececf6;
+}
+
+.whatif-table th{
+    color: #6b7280;
+    font-size: 14px;
+}
+/* decision list */
+.list-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #fff;
+    border-radius: 12px;
+    padding: 18px 22px;
+    margin-bottom: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    text-decoration: none;
+    color: inherit;
+    max-width: 700px;
+}
+
+.list-item:hover {
+    box-shadow: 0 4px 12px rgba(79,70,229,0.18);
+}
+
+.list-title{
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.list-right{
+    text-align: right;
+}
+
+.list-chance {
+    font-size: 22px;
+    font-weight: 700;
+    color: #4f46e5;
+}
+

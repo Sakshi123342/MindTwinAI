@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}MindTwin AI{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/layout.css' %}">
+    {% block extra_css %}{% endblock %}
+</head>
+
+<body>
+    <div class="app">
+        <aside class="sidebar">
+            <div class="logo"> 🧠MindTwin AI </div>
+
+            <nav class="nav">
+                <a href="{% url 'dashboard' %}"
+                    class="{% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}">📊 Dashboard</a>
+                <a href="{% url 'new_decision' %}">➕ New Decision</a>
+                <a href="{% url 'decision_list' %}">📋 My Decisions</a>
+                <a href="{% url 'whatif' %}">🔀 What-if Analysis</a>
+                <a href="{% url 'assistant' %}">🤖 AI Assistant</a>
+                <a href="{% url 'profile' %}">👤 Profile</a>
+            </nav>
+
+            <form method="post" action="{% url 'logout' %}" class="logout-form">
+                {% csrf_token %}
+                <button type="submit">↪ Logout</button>
+            </form>
+        </aside>
+
+        <main class="content">
+            {% block content %} {% endblock %}
+        </main>
+    </div>
+</body>
+
+</html>

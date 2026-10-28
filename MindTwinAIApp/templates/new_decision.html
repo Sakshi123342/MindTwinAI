@@ -1,0 +1,30 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block title %}New Decision | MindTwin AI{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/decision.css' %}">
+{% endblock %}
+
+{% block content %}
+<header class="page-header">
+    <h1>New Decision</h1>
+    <p>Tell us your goal and get a prediction.</p>
+</header>
+
+<div class="form-card">
+    <form method="post">
+        {% csrf_token %}
+        {% for field in form %}
+        <div class="form-field">
+            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                {{ field }}
+                {% for error in field.errors %}
+                <div class="field-error">{{ error }}</div>
+                {% endfor %}
+        </div>
+        {% endfor %}
+        <button type="submit" class="dc-btn">Get Prediction </button>
+    </form>
+</div>
+{% endblock %}

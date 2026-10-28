@@ -1,0 +1,40 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block title %}AI Assistant | Mindtwin AI {% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/decision.css' %}">
+
+{% endblock %}
+
+{% block content %}
+<header class="page-header">
+    <h1>AI Assistant</h1>
+    <p> Ask questions about your goals and predictions.</p>
+</header>
+
+{% if answer %}
+<div class="chat-card">
+    <div class="bubble-you">{{ question }}</div>
+    <div class="bubble-ai">{{ answer }}</div>
+</div>
+
+{% endif %}
+
+<div class="chat-card">
+    <form method="post">
+        {% csrf_token %}
+        <div class="chat-input">
+            <input type="text" name="question" placeholder="Ask about your goals..." maxlength="200">
+            <button type="submit" class="dc-btn">Ask</button>
+        </div>
+        <div class="chips">
+            <button type="submit" name="question" value="Which goal is most at risk?" class="chip">Most at-risk goal</button>
+            <button type="submit" name="question" value="How many hours do I need per day?" class="chip">Hours per day</button>
+            <button type="submit" name="question" value="Which deadline is nearest?" class="chip">Nearest deadline</button>
+            <button type="submit" name="question" value="How accurate are you?" class="chip">Accuracy</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

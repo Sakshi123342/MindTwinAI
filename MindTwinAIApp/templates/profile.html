@@ -1,0 +1,39 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block title %}Profile | MindTwin AI{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/decision.css' %}">
+{% endblock %}
+
+{% block content %}
+<header class="page-header">
+    <h1>Profile</h1>
+    <p>Your account and study Preferences.</p>
+</header>
+
+<div class="form-card">
+    <p><b>Username:</b>{{ user.username }}</p>
+    <p><b>Email:</b> {{ user.email }}</p>
+</div>
+
+<div class="form-card">
+    {% if saved %}
+    <p><b>Profile updated.</b></p>
+    {% endif %}
+    <form method="post">
+        {% csrf_token %}
+        {% for field in form %}
+        <div class="form-field">
+            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+            {{ field }}
+            {% for error in field.errors %}
+            <div class="field-error">{{ error }}</div>
+            {% endfor %}
+        </div>
+        {% endfor %}
+        <button type="submit" class="dc-btn">save</button>
+    </form>
+</div>
+{% endblock %}

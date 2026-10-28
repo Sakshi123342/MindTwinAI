@@ -1,0 +1,53 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block title %}{{ decision.goal }} | MindTwin AI{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/decision.css' %}">
+{% endblock %}
+
+{% block content %}
+<header class="page-header">
+    <a href="{% url 'dashboard' %}" class="back-link">&larr; Back to Dashboard </a>
+    <h1>{{ decision.goal }}</h1>
+    <p>{{ decision.get_category_display }} &bull; Deadline: {{ decision.deadline }} ({{ decision.days_left }} days left)</p>
+</header>
+
+<div class="detail-card">
+    <h3>Prediction</h3>
+    <div class="chance-value {% if chance >= 70 %}chance-high{% elif chance >= 40 %}chance-mid{% else %}chance-low{% endif %}">
+        {{ chance }}%
+    </div>
+    <p class="muted">Chance of completing this goal on time</p>
+    {% if required %}
+    <p>You need at least <b>{{ required }} hours/day</b> to finish by the deadline.</p>
+    {% else %}
+    <p>The deadline has passed.</p>
+    {% endif %}
+</div>
+
+<div class="detail-card">
+    <h3>What-if Analysis</h3>
+    <form method="get" class="whatif-form">
+        <span>If I study</span>
+        <input type="number" name="hours" step="0.5" min="0.5" max="16" required>
+        <span>hours/day</span>
+        <button type="submit" class="dc-btn">Check</button>
+    </form>
+    {% if whatif %}
+    <p>At <b>{{ whatif.hours }} hours/day</b>, your chance becomes <b>{{ whatif.chance }}%</b>.</p>
+    {% endif %}
+</div>
+
+<div class="detail-card">
+    <h3>Status</h3>
+    <p>Current: <b>{{ decision.get_status_display }}</b></p>
+    <form method="post" action="{% url 'update_status' decision.pk %}" class="whatif-form">
+        {% csrf_token %}
+        <button type="submit" name="status" value="completed" class="dc-btn">Mark Completed</button>
+        <button type="submit" name="status" value="not_completed" class="dc-btn">Mark Not Completed</button>
+        <button type="submit" name="status" value="in_progress" class="dc-btn">Back to In Progress</Progress></button>
+    </form>
+</div>
+{% endblock %}

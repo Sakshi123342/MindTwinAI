@@ -1,0 +1,70 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block title %}Dashboard | MindTwin AI{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+{% endblock %}
+
+{% block content %}
+<header class="page-header">
+    <h1>Hello, {{ username }}! 👋</h1>
+    <p>Your decision shape your future. Let's make better ones together.</p>
+</header>
+
+<section class="stats">
+    <div class="stat-card">
+        <div class="label">Total Decisions</div>
+        <div class="value">{{ stats.total }}</div>
+    </div>
+    <div class="stat-card">
+        <div class="label">Completed</div>
+        <div class="value">{{ stats.completed }}</div>
+    </div>
+    <div class="stat-card">
+        <div class="label">In Progress</div>
+        <div class="value">{{ stats.in_progress }}</div>
+    </div>
+    <div class="stat-card">
+        <div class="label">Accuracy</div>
+        <div class="value">{{ stats.accuracy }}</div>
+    </div>
+</section>
+<section class="section">
+    <h3>Recent Decision</h3>
+    {% if recent %}
+        <p><b>{{ recent.goal }}</b></p>
+        <p class="empty-text">Chance: {{ recent.predicted_chance }}% &bull; Deadline: {{ recent.deadline }}</p>
+        <a href="{% url 'decision_detail' recent.pk  %}" class="btn">View Details</a>
+
+    {% else %}
+         <p class="empty-text">No decision yet. Add your first goal to get a prediction.</p>
+         <a href="{% url 'new_decision' %}" class="btn">New Decision</a>
+    {% endif %}
+</section>
+
+<h3>Quick Actions</h3>
+<section class="actions">
+    <a href="{% url 'new_decision' %}" class="action-card">
+        <div class="icon">➕</div>
+        <div class="title">New Decision</div>
+        <div class="sub">Start a new decision</div>
+    </a>
+    <a href="{% url 'whatif' %}" class="action-card">
+        <div class="icon">🔀</div>
+        <div class="title">What-if Analysis</div>
+        <div class="sub">Compare scenarios</div>
+    </a>
+    <a href="{% url 'decision_list' %}" class="action-card">
+        <div class="icon">📋</div>
+        <div class="title">View History</div>
+        <div class="sub">Check past decisions</div>
+    </a>
+    <a href="{% url 'assistant' %}" class="action-card">
+        <div class="icon">🤖</div>
+        <div class="title">Chat with AI</div>
+        <div class="sub">Get guidance</div>
+    </a>
+</section>
+{% endblock %}
